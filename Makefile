@@ -25,11 +25,13 @@ ERROR	=	-g3 -fltos -fsanitize=address -fno-omit-frame-pointer
 # ***************** #
 DEPS =		Makefile			\
 			includes/utils.h	\
-			includes/nm/ft_nm.h
+			includes/nm/ft_nm.h	\
+			includes/little_libft.h
 
 SRC_NAME= 	nm/main.c       \
             nm/nm.c         \
-            utils/utils.c
+            utils/utils.c	\
+            utils/little_libft.c
 
 # ***************** #
 #		Paths		#
