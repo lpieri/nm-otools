@@ -13,6 +13,6 @@
 #ifndef FT_NM_H
 # define FT_NM_H
 
-int		sft_nm(char *filename);
+int		ft_nm(char *filename);
 
 #endif
