@@ -33,10 +33,8 @@ int		ft_nm(char *filename)
 	if (magic_nb != MAGIC_NUMBER)
 	{
 		print_error("ft_nm", "The file was not recognized as object file");
+		return (-1);
 	}
-	else
-	{
-		print_symbol(file);
-	}
+	print_symbol(file);
 	return (0);
 }
