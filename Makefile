@@ -12,29 +12,39 @@
 
 NAME	=	template
 
+# ***************** #
+#		Flags		#
+# ***************** #
 CC		=	gcc
-
-ERROR	=	-g3 -flto -fsanitize=address -fno-omit-frame-pointer
-
 override CFLAGS	+=	-Wall -Wextra -Werror
-
 CPPFLAGS=	-Iincludes
+ERROR	=	-g3 -fltos -fsanitize=address -fno-omit-frame-pointer
 
+# ***************** #
+#		Sources		#
+# ***************** #
+DEPS =		Makefile			\
+			includes/utils.h	\
+			includes/nm/ft_nm.h
+
+SRC_NAME= 	nm/main.c       \
+            nm/nm.c         \
+            utils/utils.c
+
+# ***************** #
+#		Paths		#
+# ***************** #
 SRC_PATH=	srcs
-
 OBJ_PATH=	obj
-
-DEPS =		Makefile						\
-			includes/template.h
-
-SRC_NAME= 	main.c
 
 OBJ_NAME=	$(SRC_NAME:.c=.o)
 
 SRC		=	$(addprefix $(SRC_PATH)/,$(SRC_NAME))
-
 OBJ		=	$(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
+# ***************** #
+#		Colors		#
+# ***************** #
 NONE	=	\033[0m
 RED		=	\033[31m
 GREEN	=	\033[32m
@@ -43,19 +53,20 @@ BLUE	=	\033[34m
 MAGENTA	=	\033[35m
 CYAN	=	\033[36m
 
-.PHONY:	all clean fclean re echo
-
+# ***************** #
+#		Rules		#
+# ***************** #
 all:		$(NAME)
 
 $(NAME):	echo $(OBJ)
-			@$(CC) $(CFLAGS) $(FLAGSFT) -o $(NAME) $(OBJ) $(CPPFLAGS)
+			@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(CPPFLAGS)
 			@echo "\n$(GREEN)$(NAME) ready!$(NONE)"
 
 echo:
-			@ echo -n Getting $(NAME) ready
+			@echo -n Getting $(NAME) ready
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
-			@mkdir $(dir $@) 2> /dev/null || true
+			@mkdir -p $(dir $@) 2> /dev/null || true
 			@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 			@echo -n .
 
@@ -69,3 +80,5 @@ fclean:		clean
 			@echo "$(RED)$(NAME) deleted !$(NONE)"
 
 re:			fclean all
+
+.PHONY:	all clean fclean re echo
