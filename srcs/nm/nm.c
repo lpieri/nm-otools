@@ -14,7 +14,7 @@
 #include "little_libft.h"
 #include "utils.h"
 
-void 	print_symbol(void *file)
+void	print_symbol(void *file)
 {
 	write(1, file, 2000);
 }
@@ -30,9 +30,12 @@ int		ft_nm(char *filename)
 		return (-1);
 	}
 	magic_nb = ((uint32_t*)file)[0];
-	if (magic_nb != MAGIC_NUMBER) {
+	if (magic_nb != MAGIC_NUMBER)
+	{
 		print_error("ft_nm", "The file was not recognized as object file");
-	} else {
+	}
+	else
+	{
 		print_symbol(file);
 	}
 	return (0);
