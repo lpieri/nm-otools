@@ -32,6 +32,7 @@ void	*open_file(char *filename)
 		return (NULL);
 	if (fstat(fd, &stat) == -1 || S_ISDIR(stat.st_mode))
 		return (NULL);
+	printf("%lld\n", stat.st_size);
 	ptr = mmap(NULL, stat.st_size, PROT_WRITE | PROT_READ, MAP_PRIVATE, fd, 0);
 	if (ptr == NULL)
 		return (NULL);
