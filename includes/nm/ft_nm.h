@@ -13,7 +13,10 @@
 #ifndef FT_NM_H
 # define FT_NM_H
 
-# define MAGIC_NUMBER	0xfeedfacf
+# define MAGIC_NUMBER_64	0xfeedfacf
+# define MAGIC_NUMBER_32	0xfeedface
+
+
 
 int		ft_nm(char *filename);
 

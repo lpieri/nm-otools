@@ -20,22 +20,24 @@ void	print_error(const char *prog, const char *msg)
 	ft_putendl_fd(msg, 2);
 }
 
-void	*open_file(char *filename)
+s_file 	open_file(char *filename)
 {
 	int			fd;
-	void		*ptr;
 	struct stat	stat;
+	s_file		file;
 
 	fd = 0;
-	ptr = NULL;
+	file.ptr = NULL;
 	if ((fd = open(filename, O_RDONLY)) == FAILURE)
-		return (NULL);
+		return (file);
 	if (fstat(fd, &stat) == -1 || S_ISDIR(stat.st_mode))
-		return (NULL);
+		return (file);
 	printf("%lld\n", stat.st_size);
-	ptr = mmap(NULL, stat.st_size, PROT_WRITE | PROT_READ, MAP_PRIVATE, fd, 0);
-	if (ptr == NULL)
-		return (NULL);
+	file.len = stat.st_size;
+	file.ptr = mmap(NULL, stat.st_size, PROT_WRITE | PROT_READ, MAP_PRIVATE, fd,
+			  0);
+	if (file.ptr == NULL)
+		return (file);
 	close(fd);
-	return (ptr);
+	return (file);
 }

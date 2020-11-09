@@ -21,7 +21,13 @@
 
 # define FAILURE			-1
 
+typedef struct	t_file
+{
+	void 		*ptr;
+	size_t		len;
+}				s_file;
+
 void	print_error(const char *prog, const char *msg);
-void	*open_file(char *filename);
+s_file 	open_file(char *filename);
 
 #endif
