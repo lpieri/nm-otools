@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/13 10:31:20 by cpieri            #+#    #+#             */
+/*   Updated: 2017/11/13 10:51:37 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int		i;
+	size_t			i;
+	unsigned char	*s1;
 
-	if (ac >= 2)
+	s1 = (unsigned char*)s;
+	i = 0;
+	while (i != n)
 	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
+		if (s1[i] == (unsigned char)c)
+			return (s1 + i);
+		i++;
 	}
-	return (FAILURE);
+	return (NULL);
 }

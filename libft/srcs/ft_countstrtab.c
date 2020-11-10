@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_countstrtab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tmilon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2018/02/05 10:47:08 by tmilon            #+#    #+#             */
+/*   Updated: 2018/02/05 10:53:13 by tmilon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
-
-int		main(int ac, char **av)
+int	ft_countstrtab(char **tab)
 {
-	int		i;
+	int	i;
 
-	if (ac >= 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
-	}
-	return (FAILURE);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

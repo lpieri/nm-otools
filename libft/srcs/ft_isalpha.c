@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/09 11:22:04 by cpieri            #+#    #+#             */
+/*   Updated: 2019/03/22 15:33:58 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int		ft_isalpha(int c)
 {
-	int		i;
-
-	if (ac >= 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
-	}
-	return (FAILURE);
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
 }

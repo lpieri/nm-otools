@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/15 16:04:20 by cpieri            #+#    #+#             */
+/*   Updated: 2017/11/15 16:11:15 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int		i;
+	long nb;
 
-	if (ac >= 2)
+	nb = n;
+	if (nb < 0)
 	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
+		ft_putchar_fd('-', fd);
+		nb = nb * -1;
 	}
-	return (FAILURE);
+	if (nb > 9)
+		ft_putnbr_fd(nb / 10, fd);
+	ft_putchar_fd(nb % 10 + 48, fd);
 }

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/13 13:26:34 by cpieri            #+#    #+#             */
+/*   Updated: 2019/03/22 15:36:19 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ft_memalloc(size_t size)
 {
-	int		i;
+	void	*mem;
 
-	if (ac >= 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
-	}
-	return (FAILURE);
+	if ((mem = (void*)malloc(size)) != NULL)
+		ft_bzero(mem, size);
+	return ((void*)mem);
 }

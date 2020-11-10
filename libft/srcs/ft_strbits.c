@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strbits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2019/03/07 18:04:57 by cpieri            #+#    #+#             */
+/*   Updated: 2019/03/07 18:06:09 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_strbits(char *s)
 {
 	int		i;
+	int		len;
 
-	if (ac >= 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
-	}
-	return (FAILURE);
+	i = 0;
+	len = ft_strlen(s);
+	while (i <= len)
+		ft_putbits(s[i++]);
+	ft_putchar('\n');
 }

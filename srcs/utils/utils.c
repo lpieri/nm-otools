@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "little_libft.h"
+#include "nm-otool.h"
 
 void	print_error(const char *prog, const char *msg)
 {
@@ -32,7 +31,6 @@ s_file 	open_file(char *filename)
 		return (file);
 	if (fstat(fd, &stat) == -1 || S_ISDIR(stat.st_mode))
 		return (file);
-	printf("%lld\n", stat.st_size);
 	file.len = stat.st_size;
 	file.ptr = mmap(NULL, stat.st_size, PROT_WRITE | PROT_READ, MAP_PRIVATE, fd,
 			  0);
@@ -40,4 +38,15 @@ s_file 	open_file(char *filename)
 		return (file);
 	close(fd);
 	return (file);
+}
+
+int 	check_macho_file(s_file file)
+{
+	uint32_t	magic;
+
+	magic = ((uint32_t*)file.ptr)[0];
+	if (magic == MH_MAGIC || magic == MH_MAGIC_64 || magic == MH_CIGAM ||
+		magic == MH_CIGAM_64)
+		return (0);
+	return (FAILURE);
 }

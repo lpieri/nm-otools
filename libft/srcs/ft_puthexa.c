@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_puthexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2019/03/07 16:41:37 by cpieri            #+#    #+#             */
+/*   Updated: 2019/03/20 12:41:16 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+static void	put_hexa(int nb)
 {
-	int		i;
+	if (nb > 15)
+		put_hexa(nb / 16);
+	nb %= 16;
+	if (nb < 10)
+		ft_putnbr(nb);
+	else
+		ft_putchar(nb + 'a' - 10);
+}
 
-	if (ac >= 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
-	}
-	return (FAILURE);
+void		ft_puthexa(int nb)
+{
+	if (nb < 16)
+		ft_putchar('0');
+	put_hexa(nb);
 }

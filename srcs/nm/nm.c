@@ -10,55 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm/ft_nm.h"
-#include "little_libft.h"
-#include "utils.h"
+#include "nm-otool.h"
 
 void	print_symbol(s_file file)
 {
-	size_t 	i;
-	char *find;
+	uint32_t				ncmds;
+	struct load_command*	lc;
+//	struct segment_command*	cmd;
 
-	i = 0;
-//	"__text__"
-	if ((find = ft_strnstr(file.ptr, "__TEXT", file.len)) != NULL) {
-		printf("%ld\n", find - (char*)file.ptr);
-		int j = 0;
-		while (j < find - (char*)file.ptr) {
-			printf("%x = %c ", find[j], find[j]);
-			j++;
+	ncmds = ((struct mach_header_64*)file.ptr)->ncmds;
+	lc = (struct load_command*)(file.ptr + sizeof(struct mach_header_64));
+	printf("lc = %p, file.ptr = %p\n", lc, file.ptr);
+	while (ncmds--)
+	{
+		printf("lc = %p, lc->cmd = %x\n", lc, lc->cmd);
+		if (lc->cmd == LC_SEGMENT_64 || lc->cmd == LC_SEGMENT) {
+			printf("lol\n");
 		}
-		void *test = file.ptr + (size_t)(find + 16);
-		printf("%ld\n", file.ptr - test);
-		j = 0;
-		while (j < test - file.ptr) {
-			printf("%c", ((char*)test)[j]);
-			j++;
-		}
+		lc = (void*)lc + lc->cmdsize;
 	}
-//	while (i < file.len) {
-//		printf("%c", ((char*)file.ptr)[i]);
-//		i++;
-//	}
 }
 
 int		ft_nm(char *filename)
 {
 	s_file 		file;
-	uint32_t	magic_nb;
 
 	file = open_file(filename);
 	if (file.ptr == NULL)
 	{
 		print_error("ft_nm", "The opening of the file to fail");
-		return (-1);
+		return (FAILURE);
 	}
-	magic_nb = ((uint32_t*)file.ptr)[0];
-	if (magic_nb != MAGIC_NUMBER_64 && magic_nb != MAGIC_NUMBER_32)
-	{
-		print_error("ft_nm", "The file was not recognized as object file");
-		return (-1);
-	}
+	if (check_macho_file(file) != 0)
+		return (FAILURE);
 	print_symbol(file);
 	return (0);
 }

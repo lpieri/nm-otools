@@ -18,20 +18,19 @@ NAME	=	template
 CC		=	gcc
 override CFLAGS	+=	-Wall -Wextra -Werror
 CPPFLAGS=	-Iincludes
+FLAGSFT	=	-L./libft -lft
 ERROR	=	-g3 -fltos -fsanitize=address -fno-omit-frame-pointer
 
 # ***************** #
 #		Sources		#
 # ***************** #
 DEPS =		Makefile			\
-			includes/utils.h	\
-			includes/nm/ft_nm.h	\
-			includes/little_libft.h
+			includes/nm-otool.h	\
+			libft/libft.a
 
 SRC_NAME= 	nm/main.c       \
             nm/nm.c         \
             utils/utils.c	\
-            utils/little_libft.c
 
 # ***************** #
 #		Paths		#
@@ -58,10 +57,10 @@ CYAN	=	\033[36m
 # ***************** #
 #		Rules		#
 # ***************** #
-all:		$(NAME)
+all:		LFT $(NAME)
 
-$(NAME):	echo $(OBJ)
-			@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(CPPFLAGS)
+$(NAME):	libft echo $(OBJ)
+			@$(CC) $(CFLAGS) $(FLAGSFT) -o $(NAME) $(OBJ) $(CPPFLAGS)
 			@echo "\n$(GREEN)$(NAME) ready!$(NONE)"
 
 echo:
@@ -74,13 +73,20 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
 
 clean:
 			@echo "$(YELLOW)Cleaning...$(NONE)"
+			@make clean -C ./libft/
 			@/bin/rm -f $(OBJ)
 			@rm -rf $(OBJ_PATH) 2> /dev/null || true
 
 fclean:		clean
+			@make fclean -C ./libft/
+			@echo "$(RED)Libft.a deleted$(NONE)"
 			@/bin/rm -f $(NAME)
 			@echo "$(RED)$(NAME) deleted !$(NONE)"
 
 re:			fclean all
 
-.PHONY:	all clean fclean re echo
+LFT:
+		@make -C ./libft/;
+		@echo "\n$(GREEN)Libft ready!$(NONE)";
+
+.PHONY:	all clean fclean re echo LFT

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nm.h                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 14:05:10 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 14:05:12 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/09 13:25:36 by cpieri            #+#    #+#             */
+/*   Updated: 2017/11/10 12:31:22 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_NM_H
-# define FT_NM_H
+#include "libft.h"
 
-# define MAGIC_NUMBER_64	0xfeedfacf
-# define MAGIC_NUMBER_32	0xfeedface
+void	ft_bzero(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*s1;
 
-
-
-int		ft_nm(char *filename);
-
-#endif
+	i = 0;
+	s1 = (unsigned char*)s;
+	while (i != n)
+	{
+		s1[i] = '\0';
+		i++;
+	}
+}

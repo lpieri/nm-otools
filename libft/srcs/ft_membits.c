@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_membits.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2019/03/07 18:08:47 by cpieri            #+#    #+#             */
+/*   Updated: 2019/12/17 11:12:29 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_membits(void *s, size_t len, size_t size)
 {
-	int		i;
+	size_t			i;
+	size_t			y;
+	unsigned char	*data;
+	unsigned char	b;
 
-	if (ac >= 2)
+	data = (unsigned char*)s;
+	i = 0;
+	while (i < (len * size))
 	{
-		i = 1;
-		while (i < ac)
+		y = 0;
+		while (y < size)
 		{
-			ft_nm(av[i]);
-			i++;
+			b = data[i] >> ((size - y - 1) * 8);
+			ft_putbits(data[i++]);
+			if (y + 1 != size)
+				ft_putchar('-');
+			y++;
 		}
-		return (0);
+		ft_putchar(' ');
 	}
-	return (FAILURE);
+	ft_putchar('\n');
 }

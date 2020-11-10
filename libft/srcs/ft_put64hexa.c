@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_put64hexa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2019/05/20 10:59:05 by cpieri            #+#    #+#             */
+/*   Updated: 2019/05/20 11:10:21 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+static void	put_64hexa(uint64_t nb)
 {
-	int		i;
+	if (nb > 15)
+		put_64hexa(nb / 16);
+	nb %= 16;
+	if (nb < 10)
+		ft_putnbr(nb);
+	else
+		ft_putchar(nb + 'a' - 10);
+}
 
-	if (ac >= 2)
-	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
-	}
-	return (FAILURE);
+void		ft_put64hexa(uint64_t nb)
+{
+	if (nb < 16)
+		ft_putchar('0');
+	put_64hexa(nb);
 }

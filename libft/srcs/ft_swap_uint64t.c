@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   little_libft.h                                     :+:      :+:    :+:   */
+/*   ft_swap_uint64t.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 14:03:55 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 14:04:02 by cpieri           ###   ########.fr       */
+/*   Created: 2019/03/18 15:42:06 by cpieri            #+#    #+#             */
+/*   Updated: 2020/01/06 08:55:43 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LITTLE_LIBFT_H
-# define LITTLE_LIBFT_H
+#include "libft.h"
 
-# include <unistd.h>
-
-void	ft_putstr_fd(char const *s, int fd);
-void	ft_putendl_fd(char const *s, int fd);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-#endif
+uint64_t	swap_uint64t(uint64_t nb)
+{
+	nb = (nb & 0x00000000FFFFFFFF) << 32 | (nb & 0xFFFFFFFF00000000) >> 32;
+	nb = (nb & 0x0000FFFF0000FFFF) << 16 | (nb & 0xFFFF0000FFFF0000) >> 16;
+	nb = (nb & 0x00FF00FF00FF00FF) << 8  | (nb & 0xFF00FF00FF00FF00) >> 8;
+	return (nb);
+}

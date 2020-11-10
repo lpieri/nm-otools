@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ftb_backwardmemcpy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tmilon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/12/01 07:38:02 by tmilon            #+#    #+#             */
+/*   Updated: 2017/12/01 07:43:54 by tmilon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ftb_backwardmemcpy(void *dst, const void *src, size_t len)
 {
-	int		i;
+	char	*altsrc;
+	char	*altdst;
 
-	if (ac >= 2)
+	altsrc = (char *)src;
+	altdst = (char *)dst;
+	while (len > 0)
 	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
+		altdst[len - 1] = altsrc[len - 1];
+		len--;
 	}
-	return (FAILURE);
+	return (dst);
 }

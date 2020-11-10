@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ftb_intlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tmilon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/29 18:58:37 by tmilon            #+#    #+#             */
+/*   Updated: 2017/11/29 20:25:04 by tmilon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
-
-int		main(int ac, char **av)
+int	ftb_intlen(int n)
 {
-	int		i;
+	int	i;
 
-	if (ac >= 2)
+	i = 1;
+	if (n < 0)
 	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
+		if (n == -2147483648)
+			return (11);
+		n = -n;
+		i++;
 	}
-	return (FAILURE);
+	while (n >= 10)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }

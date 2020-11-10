@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cpieri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/10 11:00:57 by cpieri            #+#    #+#             */
+/*   Updated: 2017/11/10 12:43:56 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
 	int		i;
+	char	*tmp;
 
-	if (ac >= 2)
+	tmp = (char*)s;
+	i = ft_strlen(s);
+	if (c == '\0')
+		return (tmp + ft_strlen(s));
+	while (i >= 0)
 	{
-		i = 1;
-		while (i < ac)
+		if (tmp[i] == c)
 		{
-			ft_nm(av[i]);
-			i++;
+			tmp = tmp + i;
+			return (tmp);
 		}
-		return (0);
+		i--;
 	}
-	return (FAILURE);
+	return (0);
 }

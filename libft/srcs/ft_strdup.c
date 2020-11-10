@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:22:00 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:22:10 by cpieri           ###   ########.fr       */
+/*   Created: 2017/11/09 09:31:10 by cpieri            #+#    #+#             */
+/*   Updated: 2019/05/06 15:09:18 by cpieri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strdup(const char *s1)
 {
 	int		i;
+	char	*s2;
 
-	if (ac >= 2)
+	if (!s1)
+		return (NULL);
+	i = ft_strlen(s1);
+	s2 = (char*)malloc(sizeof(*s2) * (i + 1));
+	if (s2 == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		i = 1;
-		while (i < ac)
-		{
-			ft_nm(av[i]);
-			i++;
-		}
-		return (0);
+		s2[i] = s1[i];
+		i++;
 	}
-	return (FAILURE);
+	s2[i] = '\0';
+	return (s2);
 }
