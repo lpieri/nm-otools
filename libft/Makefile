@@ -16,7 +16,7 @@ CC		=	gcc
 
 ERROR	=	-g3 -flto -fsanitize=address -fno-omit-frame-pointer
 
-override CFLAGS	+=	-Wall -Wextra -Werror
+override CFLAGS	+=	-Wall -Wextra -Werror $(ERROR)
 
 INCS	=	libft.h
 
@@ -130,7 +130,8 @@ SRCS = 		ft_atoi.c					\
 			ft_right_rotate.c			\
 			ft_swap_uint32t.c			\
 			ft_swap_uint64t.c			\
-			ft_putbits.c
+			ft_putbits.c				\
+			ft_hexdump.c
 
 OBJS	=	$(SRCS:.c=.o)
 

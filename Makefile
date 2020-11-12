@@ -16,10 +16,10 @@ NAME	=	template
 #		Flags		#
 # ***************** #
 CC		=	gcc
-override CFLAGS	+=	-Wall -Wextra -Werror
+override CFLAGS	+=	-Wall -Wextra -Werror $(ERROR)
 CPPFLAGS=	-Iincludes
 FLAGSFT	=	-L./libft -lft
-ERROR	=	-g3 -fltos -fsanitize=address -fno-omit-frame-pointer
+ERROR	=	-g3 -flto -fsanitize=address -fno-omit-frame-pointer
 
 # ***************** #
 #		Sources		#

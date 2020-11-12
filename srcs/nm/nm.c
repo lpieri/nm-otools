@@ -12,7 +12,7 @@
 
 #include "nm-otool.h"
 
-void 	parse_segment(struct segment_command_64* seg)
+void 	parse_segment(struct segment_command_64* seg, s_file file)
 {
 	struct section_64		*section;
 	uint32_t				nscets;
@@ -22,13 +22,13 @@ void 	parse_segment(struct segment_command_64* seg)
 	nscets = seg->nsects;
 	while (nscets--)
 	{
-		if (ft_strncmp(section->segname, "__text", 16)){
-			printf("%s\n", ft_hex64_to_char(swap_uint64t(section->addr)));
-			printf("texte__ = %s\n", seg->segname);
+		if (ft_strncmp(section->sectname, "__text", 16) == 0){
+
+			ft_hexdump((void*)(file.ptr + section->offset), section->size,
+			  section->addr);
 		}
 		section = (void*)section + sizeof(struct section_64);
 	}
-//	printf("%s\n", seg->segname);
 }
 
 void	parse_macho(s_file file)
@@ -41,7 +41,7 @@ void	parse_macho(s_file file)
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT_64 || lc->cmd == LC_SEGMENT)
-			parse_segment((struct segment_command_64*)lc);
+			parse_segment((struct segment_command_64*)lc, file);
 		else if (lc->cmd == LC_SYMTAB) {
 			// nm func
 			printf("lol\n");

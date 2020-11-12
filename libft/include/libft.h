@@ -160,4 +160,6 @@ uint32_t			right_rotate(uint32_t x, uint32_t nb);
 uint32_t			swap_uint32t(uint32_t nb);
 uint64_t			swap_uint64t(uint64_t nb);
 
+void				ft_hexdump(void *data, size_t size, uint64_t addr);
+
 #endif
