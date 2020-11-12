@@ -39,5 +39,6 @@ int 	check_macho_file(s_file file);
 
 s_file 	open_file(char *filename);
 void	print_error(const char *prog, const char *msg);
+void	print_msg(const char *prog, const char *msg);
 
 #endif

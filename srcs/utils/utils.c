@@ -12,6 +12,13 @@
 
 #include "nm-otool.h"
 
+void	print_msg(const char *prog, const char *msg)
+{
+	ft_putstr_fd(prog, 1);
+	ft_putstr_fd(": ", 1);
+	ft_putendl_fd(msg, 1);
+}
+
 void	print_error(const char *prog, const char *msg)
 {
 	ft_putstr_fd(prog, 2);

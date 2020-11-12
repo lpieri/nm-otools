@@ -64,7 +64,7 @@ int		ft_nm(char *filename)
 	}
 	if (check_macho_file(file) != 0)
 	{
-		print_error(filename, "is not an object file");
+		print_msg(filename, "is not an object file");
 		return (FAILURE);
 	}
 	parse_macho(file);
