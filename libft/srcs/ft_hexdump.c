@@ -25,10 +25,11 @@ void	ft_hexdump(void *data, size_t size, uint64_t addr)
 		write(1, " ", 1);
 		if ((i + 1) % 8 == 0 || i + 1 == size)
 		{
-			if ((i + 1) % 16 == 0)
+			if ((i + 1) % 16 == 0 && i + 1 != size)
 			{
 				write(1, "\n", 1);
-				ft_putstr(ft_hex64_to_char(swap_uint64t(addr + i)));
+				addr += 16;
+				ft_putstr(ft_hex64_to_char(swap_uint64t(addr)));
 				ft_putchar('\t');
 			}
 			else if (i + 1 == size)

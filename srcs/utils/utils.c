@@ -32,6 +32,7 @@ s_file 	open_file(char *filename)
 	if (fstat(fd, &stat) == -1 || S_ISDIR(stat.st_mode))
 		return (file);
 	file.len = stat.st_size;
+	file.name = filename;
 	file.ptr = mmap(NULL, stat.st_size, PROT_WRITE | PROT_READ, MAP_PRIVATE, fd,
 			  0);
 	if (file.ptr == NULL)

@@ -26,6 +26,7 @@
 typedef struct	t_file
 {
 	void 		*ptr;
+	char 		*name;
 	size_t		len;
 }				s_file;
 

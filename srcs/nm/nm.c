@@ -23,7 +23,9 @@ void 	parse_segment(struct segment_command_64* seg, s_file file)
 	while (nscets--)
 	{
 		if (ft_strncmp(section->sectname, "__text", 16) == 0){
-
+			ft_putstr(file.name);
+			ft_putendl(":");
+			ft_putstr("Contents of (__TEXT,__text) section\n");
 			ft_hexdump((void*)(file.ptr + section->offset), section->size,
 			  section->addr);
 		}
@@ -42,10 +44,10 @@ void	parse_macho(s_file file)
 	{
 		if (lc->cmd == LC_SEGMENT_64 || lc->cmd == LC_SEGMENT)
 			parse_segment((struct segment_command_64*)lc, file);
-		else if (lc->cmd == LC_SYMTAB) {
-			// nm func
-			printf("lol\n");
-		}
+//		else if (lc->cmd == LC_SYMTAB) {
+//			// nm func
+////			printf("lol\n");
+//		}
 		lc = (void*)lc + lc->cmdsize;
 	}
 }
@@ -61,7 +63,10 @@ int		ft_nm(char *filename)
 		return (FAILURE);
 	}
 	if (check_macho_file(file) != 0)
+	{
+		print_error(filename, "is not an object file");
 		return (FAILURE);
+	}
 	parse_macho(file);
 	return (0);
 }
