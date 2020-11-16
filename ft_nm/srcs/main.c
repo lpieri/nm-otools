@@ -10,7 +10,7 @@ static int 	ft_nm(char *filename)
 		print_error("ft_otool", "The opening of the file to fail");
 		return (FAILURE);
 	}
-	if ((file.arch = check_macho_file(file)) == FAILURE)
+	if ((file.arch = check_macho_file(file)) == -1)
 	{
 		print_msg(filename, "is not an object file");
 		return (FAILURE);

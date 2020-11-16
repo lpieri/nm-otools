@@ -3,6 +3,7 @@
 
 # include "../../libft/include/libft.h"
 # include <mach-o/loader.h>
+# include <mach-o/nlist.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include <stdio.h>
