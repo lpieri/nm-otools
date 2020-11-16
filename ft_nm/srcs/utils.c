@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "nm-otool.h"
+#include "../includes/ft_nm.h"
 
 void	print_msg(const char *prog, const char *msg)
 {
@@ -55,6 +55,11 @@ int 	check_macho_file(s_file file)
 	magic = ((uint32_t*)file.ptr)[0];
 	if (magic == MH_MAGIC || magic == MH_MAGIC_64 || magic == MH_CIGAM ||
 		magic == MH_CIGAM_64)
-		return (0);
+	{
+		if (magic == MH_CIGAM_64 || magic == MH_MAGIC_64)
+			return (1);
+		else
+			return (0);
+	}
 	return (FAILURE);
 }
