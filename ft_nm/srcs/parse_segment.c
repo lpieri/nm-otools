@@ -23,7 +23,8 @@ static void 	parse_symtab_64(s_symtab_command* seg, s_file file)
 		}
 		else
 			ft_putstr("                 ");
-		print_symbol(symbol_data);
+		ft_putchar(print_symbol_64(symbol_data));
+		ft_putchar(' ');
 		if (ft_strcmp(symname, "\0") != 0)
 			ft_putendl(symname);
 		i++;

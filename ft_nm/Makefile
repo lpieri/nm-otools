@@ -30,7 +30,8 @@ DEPS =		Makefile			\
 
 SRC_NAME= 	main.c       		\
             parse_segment.c     \
-            utils.c
+            utils.c				\
+            print_symbol.c
 
 # ***************** #
 #		Paths		#
