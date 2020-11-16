@@ -44,10 +44,6 @@ void	parse_macho(s_file file)
 	{
 		if (lc->cmd == LC_SEGMENT_64 || lc->cmd == LC_SEGMENT)
 			parse_segment((struct segment_command_64*)lc, file);
-//		else if (lc->cmd == LC_SYMTAB) {
-//			// nm func
-////			printf("lol\n");
-//		}
 		lc = (void*)lc + lc->cmdsize;
 	}
 }
@@ -59,7 +55,7 @@ int		ft_nm(char *filename)
 	file = open_file(filename);
 	if (file.ptr == NULL)
 	{
-		print_error("ft_nm", "The opening of the file to fail");
+		print_error("ft_otool", "The opening of the file to fail");
 		return (FAILURE);
 	}
 	if (check_macho_file(file) != 0)

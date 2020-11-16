@@ -21,7 +21,7 @@
 # include <sys/mman.h>
 # include <unistd.h>
 
-# define FAILURE			-1
+# define FAILURE	-1
 
 typedef struct	t_file
 {
