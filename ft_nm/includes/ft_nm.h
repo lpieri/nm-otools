@@ -12,6 +12,13 @@
 
 # define FAILURE	-1
 
+typedef struct mach_header		s_mach_header;
+typedef struct mach_header_64	s_mach_header_64;
+typedef struct load_command		s_load_command;
+typedef struct symtab_command	s_symtab_command;
+typedef struct nlist			s_nslist;
+typedef struct nlist_64			s_nslist_64;
+
 typedef struct	t_file
 {
 	void 		*ptr;
@@ -22,6 +29,9 @@ typedef struct	t_file
 
 void	parse_macho(s_file file);
 void	parse_macho_64(s_file file);
+
+void 	print_symbol(s_nslist *sym);
+void 	print_symbol_64(s_nslist_64 *sym);
 
 int 	check_macho_file(s_file file);
 
