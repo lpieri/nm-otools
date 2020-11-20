@@ -17,6 +17,10 @@ static int 	ft_otool(char *filename)
 	}
 	if (file.arch == 1)
 		parse_macho_64(file);
+	else if (file.arch == 2)
+		parse_fat(file);
+	else if (file.arch == 3)
+		parse_fat_64(file);
 	else
 		parse_macho(file);
 	return (0);

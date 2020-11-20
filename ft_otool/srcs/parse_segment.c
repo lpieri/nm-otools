@@ -1,6 +1,6 @@
 #include "../includes/ft_otool.h"
 
-static void 	parse_segment_64(struct segment_command_64* seg, s_file file)
+void 	parse_segment_64(s_segment_command_64* seg, s_file file)
 {
 	struct section_64		*section;
 	uint32_t				nscets;
@@ -23,21 +23,21 @@ static void 	parse_segment_64(struct segment_command_64* seg, s_file file)
 
 void	parse_macho_64(s_file file)
 {
-	uint32_t				ncmds;
-	struct load_command*	lc;
+	uint32_t		ncmds;
+	s_load_command	*lc;
 
-	ncmds = ((struct mach_header_64*)file.ptr)->ncmds;
-	lc = (struct load_command*)(file.ptr + sizeof(struct mach_header_64));
+	ncmds = ((s_mach_header_64*)file.ptr)->ncmds;
+	lc = (s_load_command*)(file.ptr + sizeof(s_mach_header_64));
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
-			parse_segment_64((struct segment_command_64*) lc, file);
+			parse_segment_64((s_segment_command_64*) lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
 }
 
 
-static void 	parse_segment(struct segment_command* seg, s_file file)
+void 	parse_segment(s_segment_command* seg, s_file file)
 {
 	struct section		*section;
 	uint32_t			nscets;
@@ -59,15 +59,15 @@ static void 	parse_segment(struct segment_command* seg, s_file file)
 
 void	parse_macho(s_file file)
 {
-	uint32_t				ncmds;
-	struct load_command*	lc;
+	uint32_t		ncmds;
+	s_load_command	*lc;
 
-	ncmds = ((struct mach_header*)file.ptr)->ncmds;
-	lc = (struct load_command*)(file.ptr + sizeof(struct mach_header));
+	ncmds = ((s_mach_header*)file.ptr)->ncmds;
+	lc = (s_load_command*)(file.ptr + sizeof(s_mach_header));
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT)
-			parse_segment((struct segment_command*)lc, file);
+			parse_segment((s_segment_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
 }

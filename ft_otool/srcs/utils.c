@@ -53,13 +53,14 @@ int 	check_macho_file(s_file file)
 	uint32_t	magic;
 
 	magic = ((uint32_t*)file.ptr)[0];
-	if (magic == MH_MAGIC || magic == MH_MAGIC_64 || magic == MH_CIGAM ||
-		magic == MH_CIGAM_64)
-	{
-		if (magic == MH_CIGAM_64 || magic == MH_MAGIC_64)
-			return (1);
-		else
-			return (0);
-	}
-	return (FAILURE);
+	if (magic == MH_CIGAM_64 || magic == MH_MAGIC_64)
+		return (1);
+	else if (magic == FAT_MAGIC || magic == FAT_CIGAM)
+		return (2);
+	else if (magic == FAT_MAGIC_64 || magic == FAT_CIGAM_64)
+		return (3);
+	else if (magic == MH_MAGIC || magic == MH_CIGAM)
+		return (0);
+	else
+		return (FAILURE);
 }

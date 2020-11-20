@@ -19,7 +19,7 @@ static char 	find_section(uint8_t sect, uint8_t type)
 
 char 	print_symbol_64(s_nslist_64 *sym)
 {
-	if (sym->n_type & N_STAB)
+	if (N_STAB & sym->n_type)
 		return ('-');
 	else if ((N_TYPE & sym->n_type) == N_UNDF)
 	{

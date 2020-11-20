@@ -17,16 +17,17 @@ static void 	parse_symtab_64(s_symtab_command* seg, s_file file)
 		symbol_data = (s_nslist_64*)symtab + i;
 		symname = strtab + symbol_data->n_un.n_strx;
 		if (symbol_data->n_value != 0 && ft_strcmp(symname, "\0") != 0)
-		{
 			ft_putstr(ft_hex64_to_char(swap_uint64t(symbol_data->n_value)));
-			ft_putchar(' ');
-		}
-		else
-			ft_putstr("                 ");
-		ft_putchar(print_symbol_64(symbol_data));
-		ft_putchar(' ');
 		if (ft_strcmp(symname, "\0") != 0)
+		{
+			if (symbol_data->n_value != 0)
+				ft_putchar(' ');
+			else
+				ft_putstr("                 ");
+			ft_putchar(print_symbol_64(symbol_data));
+			ft_putchar(' ');
 			ft_putendl(symname);
+		}
 		i++;
 	}
 }
