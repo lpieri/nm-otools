@@ -12,18 +12,20 @@
 
 #include "../includes/ft_otool.h"
 
-void	print_msg(const char *prog, const char *msg)
+int 	print_msg(const char *prog, const char *msg, int ret)
 {
 	ft_putstr_fd(prog, 1);
 	ft_putstr_fd(": ", 1);
 	ft_putendl_fd(msg, 1);
+	return (ret);
 }
 
-void	print_error(const char *prog, const char *msg)
+int 	print_error(const char *prog, const char *msg)
 {
 	ft_putstr_fd(prog, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(msg, 2);
+	return (-1);
 }
 
 s_file 	open_file(char *filename)
@@ -46,21 +48,4 @@ s_file 	open_file(char *filename)
 		return (file);
 	close(fd);
 	return (file);
-}
-
-int 	check_macho_file(s_file file)
-{
-	uint32_t	magic;
-
-	magic = ((uint32_t*)file.ptr)[0];
-	if (magic == MH_CIGAM_64 || magic == MH_MAGIC_64)
-		return (1);
-	else if (magic == FAT_MAGIC || magic == FAT_CIGAM)
-		return (2);
-	else if (magic == FAT_MAGIC_64 || magic == FAT_CIGAM_64)
-		return (3);
-	else if (magic == MH_MAGIC || magic == MH_CIGAM)
-		return (0);
-	else
-		return (FAILURE);
 }

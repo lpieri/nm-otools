@@ -2,23 +2,29 @@
 # define FT_OTOOL_H
 
 # include "../../libft/include/libft.h"
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/stat.h>
+# include <sys/mman.h>
+
 # include <mach-o/loader.h>
 # include <mach-o/fat.h>
-# include <fcntl.h>
-# include <sys/stat.h>
-# include <stdio.h>
-# include <sys/mman.h>
-# include <unistd.h>
+# include <ar.h>
 
 # define FAILURE	-1
+# define AR_MAGIC 0x72613c21
+# define AR_CIGAM 0x213c6172
 
 typedef struct mach_header			s_mach_header;
 typedef struct mach_header_64		s_mach_header_64;
+typedef struct fat_header			s_fat_header;
+typedef struct ar_hdr				s_ar_header;
+
 typedef struct load_command			s_load_command;
 typedef struct segment_command		s_segment_command;
 typedef struct segment_command_64	s_segment_command_64;
 
-typedef struct fat_header		s_fat_header;
+
 
 typedef struct	t_file
 {
@@ -32,14 +38,13 @@ void	parse_macho(s_file file);
 void	parse_macho_64(s_file file);
 void	parse_fat(s_file file);
 void	parse_fat_64(s_file file);
+void	parse_archive(s_file file);
 
 void 	parse_segment(s_segment_command *seg, s_file file);
 void 	parse_segment_64(s_segment_command_64 *seg, s_file file);
 
-int 	check_macho_file(s_file file);
-
 s_file 	open_file(char *filename);
-void	print_error(const char *prog, const char *msg);
-void	print_msg(const char *prog, const char *msg);
+int 	print_error(const char *prog, const char *msg);
+int 	print_msg(const char *prog, const char *msg, int ret);
 
 #endif

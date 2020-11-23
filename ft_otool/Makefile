@@ -31,6 +31,7 @@ DEPS =		Makefile			\
 SRC_NAME= 	main.c       		\
             parse_segment.c     \
             parse_fat.c			\
+            archive.c			\
             utils.c
 
 # ***************** #
