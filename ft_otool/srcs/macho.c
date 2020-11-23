@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   macho.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/23 16:09:43 by cpieri            #+#    #+#             */
+/*   Updated: 2020/11/23 16:09:47 by cpieri           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_otool.h"
 
 static void	parse_segment_64(t_segment_command_64 *seg, t_file file)
@@ -14,7 +26,7 @@ static void	parse_segment_64(t_segment_command_64 *seg, t_file file)
 			ft_putstr(file.name);
 			ft_putstr(":\nContents of (__TEXT,__text) section\n");
 			ft_hexdump((void*)(file.ptr + section->offset), section->size,
-			  section->addr);
+					section->addr);
 		}
 		section = (void*)section + sizeof(t_section_64);
 	}
@@ -50,7 +62,7 @@ static void	parse_segment(t_segment_command *seg, t_file file)
 			ft_putstr(file.name);
 			ft_putstr(":\nContents of (__TEXT,__text) section\n");
 			ft_hexdump((void*)(file.ptr + section->offset), section->size,
-			  section->addr);
+					section->addr);
 		}
 		section = (void*)section + sizeof(struct section);
 	}
