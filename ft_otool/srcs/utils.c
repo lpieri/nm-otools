@@ -34,9 +34,9 @@ t_file 	open_file(char *filename)
 	struct stat	stat;
 	t_file		file;
 
-	fd = 0;
 	file.ptr = NULL;
-	if ((fd = open(filename, O_RDONLY)) == FAILURE)
+	fd = open(filename, O_RDONLY);
+	if (fd == FAILURE)
 		return (file);
 	if (fstat(fd, &stat) == -1 || S_ISDIR(stat.st_mode))
 		return (file);

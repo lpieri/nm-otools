@@ -1,27 +1,26 @@
 #include "../includes/ft_otool.h"
 
-static void 	parse_segment_64(t_segment_command_64* seg, t_file file)
+static void	parse_segment_64(t_segment_command_64 *seg, t_file file)
 {
-	struct section_64		*section;
-	uint32_t				nscets;
+	t_section_64		*section;
+	uint32_t			nscets;
 
-	section = (struct section_64*)((void*)seg + sizeof(struct
-		segment_command_64));
+	section = (t_section_64*)((void*)seg + sizeof(t_segment_command_64));
 	nscets = seg->nsects;
 	while (nscets--)
 	{
-		if (ft_strncmp(section->sectname, "__text", 16) == 0){
+		if (ft_strncmp(section->sectname, "__text", 16) == 0)
+		{
 			ft_putstr(file.name);
-			ft_putendl(":");
-			ft_putstr("Contents of (__TEXT,__text) section\n");
+			ft_putstr(":\nContents of (__TEXT,__text) section\n");
 			ft_hexdump((void*)(file.ptr + section->offset), section->size,
-					   section->addr);
+			  section->addr);
 		}
-		section = (void*)section + sizeof(struct section_64);
+		section = (void*)section + sizeof(t_section_64);
 	}
 }
 
-int 			parse_macho_64(t_file file)
+int	parse_macho_64(t_file file)
 {
 	uint32_t		ncmds;
 	t_load_command	*lc;
@@ -37,27 +36,27 @@ int 			parse_macho_64(t_file file)
 	return (0);
 }
 
-static void 	parse_segment(t_segment_command* seg, t_file file)
+static void	parse_segment(t_segment_command *seg, t_file file)
 {
-	struct section		*section;
-	uint32_t			nscets;
+	t_section		*section;
+	uint32_t		nscets;
 
-	section = (struct section*)((void*)seg + sizeof(struct segment_command));
+	section = (t_section*)((void*)seg + sizeof(t_segment_command));
 	nscets = seg->nsects;
 	while (nscets--)
 	{
-		if (ft_strncmp(section->sectname, "__text", 16) == 0){
+		if (ft_strncmp(section->sectname, "__text", 16) == 0)
+		{
 			ft_putstr(file.name);
-			ft_putendl(":");
-			ft_putstr("Contents of (__TEXT,__text) section\n");
+			ft_putstr(":\nContents of (__TEXT,__text) section\n");
 			ft_hexdump((void*)(file.ptr + section->offset), section->size,
-					   section->addr);
+			  section->addr);
 		}
 		section = (void*)section + sizeof(struct section);
 	}
 }
 
-int 			parse_macho(t_file file)
+int	parse_macho(t_file file)
 {
 	uint32_t		ncmds;
 	t_load_command	*lc;

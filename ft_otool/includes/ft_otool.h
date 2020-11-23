@@ -23,7 +23,6 @@
 # include <mach-o/fat.h>
 # include <ar.h>
 
-
 # define FAILURE	-1
 # define AR_MAGIC 0x72613c21
 # define AR_CIGAM 0x213c6172
@@ -39,6 +38,8 @@ typedef struct fat_arch_64			t_fat_arch_64;
 typedef struct load_command			t_load_command;
 typedef struct segment_command		t_segment_command;
 typedef struct segment_command_64	t_segment_command_64;
+typedef struct section				t_section;
+typedef struct section_64			t_section_64;
 
 typedef struct	s_file
 {

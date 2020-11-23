@@ -7,12 +7,12 @@ static int	is_hostarch(cpu_type_t type)
 	return (0);
 }
 
-int		parse_fat(t_file file)
+int	parse_fat(t_file file)
 {
-	uint32_t 		nfat;
+	uint32_t		nfat;
 	t_fat_arch		*arch;
-	t_file 			new;
-	uint32_t 		i;
+	t_file			new;
+	uint32_t		i;
 
 	nfat = swap_uint32t(((t_fat_header *)file.ptr)->nfat_arch);
 	arch = (t_fat_arch*)(file.ptr + sizeof(t_fat_header));
@@ -20,7 +20,7 @@ int		parse_fat(t_file file)
 	while (++i < nfat)
 	{
 		new = (t_file){file.ptr + swap_uint32t(arch[i].offset), file.name,
-				 file.len};
+			file.len};
 		ft_otool(new);
 		if (is_hostarch(swap_uint32t(arch[i].cputype)))
 			return (0);
@@ -28,12 +28,12 @@ int		parse_fat(t_file file)
 	return (0);
 }
 
-int		parse_fat_64(t_file file)
+int	parse_fat_64(t_file file)
 {
-	uint32_t 		nfat;
+	uint32_t		nfat;
 	t_fat_arch_64	*arch;
-	t_file 			new;
-	uint32_t 		i;
+	t_file			new;
+	uint32_t		i;
 
 	nfat = swap_uint32t(((t_fat_header *)file.ptr)->nfat_arch);
 	arch = (t_fat_arch_64*)(file.ptr + sizeof(t_fat_header));
@@ -41,7 +41,7 @@ int		parse_fat_64(t_file file)
 	while (++i < nfat)
 	{
 		new = (t_file){file.ptr + swap_uint32t(arch[i].offset), file.name,
-				 file.len};
+			file.len};
 		ft_otool(new);
 		if (is_hostarch(swap_uint32t(arch[i].cputype)))
 			return (0);

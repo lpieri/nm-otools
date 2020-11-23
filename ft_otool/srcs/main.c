@@ -1,6 +1,6 @@
 #include "../includes/ft_otool.h"
 
-int 		ft_otool(t_file file)
+int	ft_otool(t_file file)
 {
 	uint32_t	magic;
 
@@ -21,8 +21,7 @@ int 		ft_otool(t_file file)
 
 static int 	start(char *filename)
 {
-	t_file 		file;
-
+	t_file		file;
 
 	file = open_file(filename);
 	if (file.ptr == NULL)
@@ -31,7 +30,7 @@ static int 	start(char *filename)
 	return (0);
 }
 
-int			main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	int		i;
 
