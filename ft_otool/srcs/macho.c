@@ -42,7 +42,7 @@ int	parse_macho_64(t_file file)
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
-			parse_segment_64((t_segment_command_64*) lc, file);
+			parse_segment_64((t_segment_command_64*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
 	return (0);
