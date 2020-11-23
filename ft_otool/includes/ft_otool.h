@@ -11,6 +11,8 @@
 # include <mach-o/fat.h>
 # include <ar.h>
 
+# include <stdio.h>
+
 # define FAILURE	-1
 # define AR_MAGIC 0x72613c21
 # define AR_CIGAM 0x213c6172
@@ -31,14 +33,15 @@ typedef struct	t_file
 	void 		*ptr;
 	char 		*name;
 	size_t		len;
-	int 		arch;
 }				s_file;
 
-void	parse_macho(s_file file);
-void	parse_macho_64(s_file file);
-void	parse_fat(s_file file);
-void	parse_fat_64(s_file file);
-void	parse_archive(s_file file);
+int 	ft_otool(s_file file);
+
+int 	parse_macho(s_file file);
+int 	parse_macho_64(s_file file);
+int 	parse_fat(s_file file);
+int 	parse_fat_64(s_file file);
+int 	parse_archive(s_file file);
 
 void 	parse_segment(s_segment_command *seg, s_file file);
 void 	parse_segment_64(s_segment_command_64 *seg, s_file file);

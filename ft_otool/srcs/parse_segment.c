@@ -21,7 +21,7 @@ void 	parse_segment_64(s_segment_command_64* seg, s_file file)
 	}
 }
 
-void	parse_macho_64(s_file file)
+int 	parse_macho_64(s_file file)
 {
 	uint32_t		ncmds;
 	s_load_command	*lc;
@@ -34,6 +34,7 @@ void	parse_macho_64(s_file file)
 			parse_segment_64((s_segment_command_64*) lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
+	return (0);
 }
 
 
@@ -57,7 +58,7 @@ void 	parse_segment(s_segment_command* seg, s_file file)
 	}
 }
 
-void	parse_macho(s_file file)
+int 	parse_macho(s_file file)
 {
 	uint32_t		ncmds;
 	s_load_command	*lc;
@@ -70,4 +71,5 @@ void	parse_macho(s_file file)
 			parse_segment((s_segment_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
+	return (0);
 }

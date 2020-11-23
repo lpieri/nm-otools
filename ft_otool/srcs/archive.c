@@ -7,24 +7,28 @@ static void 	print_name(char *name)
 	write(1, "\n", 1);
 }
 
-void	parse_archive(s_file file)
+int 	parse_archive(s_file file)
 {
 	s_ar_header		*header;
+	char			*str;
+	size_t			len;
+	s_file 			new;
 
 	print_name(file.name);
 	file.ptr += SARMAG;
-	header = (s_ar_header*)file.ptr;
-	file.ptr += ft_atol(header->ar_size) + sizeof(s_ar_header);
 	while (file.ptr)
 	{
 		header = (s_ar_header*)file.ptr;
 		if (ft_atoi(header->ar_size) <= 0)
-			return ;
-		write(1, header->ar_fmag + 2, 16);
-		write(1, "\n", 1);
-		ft_hexdump((void*)(file.ptr + + sizeof(s_ar_header)), ft_atoi
-		(header->ar_size), (uint64_t)header);
+			return (0);
+		str = file.ptr + sizeof(s_ar_header);
+		len = ft_strlen(str);
+		while (!str[len++]);
+		new.name = header->ar_fmag + 2;
+		new.ptr = (void*)(file.ptr + sizeof(s_ar_header) + len - 1);
+		new.len = file.len;
+		ft_otool(new);
 		file.ptr +=  ft_atol(header->ar_size) + sizeof(s_ar_header);
 	}
-	return ;
+	return (0);
 }
