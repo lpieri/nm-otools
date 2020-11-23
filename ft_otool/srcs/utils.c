@@ -28,11 +28,11 @@ int 	print_error(const char *prog, const char *msg)
 	return (-1);
 }
 
-s_file 	open_file(char *filename)
+t_file 	open_file(char *filename)
 {
 	int			fd;
 	struct stat	stat;
-	s_file		file;
+	t_file		file;
 
 	fd = 0;
 	file.ptr = NULL;

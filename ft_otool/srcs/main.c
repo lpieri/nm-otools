@@ -1,12 +1,10 @@
 #include "../includes/ft_otool.h"
 
-int 		ft_otool(s_file file)
+int 		ft_otool(t_file file)
 {
 	uint32_t	magic;
 
 	magic = ((uint32_t*)file.ptr)[0];
-//	printf("%x\n", magic);
-//	printf("%x\n", swap_uint32t(magic));
 	if (magic == MH_MAGIC || magic == MH_CIGAM)
 		return (parse_macho(file));
 	else if (magic == MH_CIGAM_64 || magic == MH_MAGIC_64)
@@ -23,7 +21,7 @@ int 		ft_otool(s_file file)
 
 static int 	start(char *filename)
 {
-	s_file 		file;
+	t_file 		file;
 
 
 	file = open_file(filename);

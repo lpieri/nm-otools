@@ -1,6 +1,6 @@
 #include "../includes/ft_otool.h"
 
-static void 	parse_segment_64(s_segment_command_64* seg, s_file file)
+static void 	parse_segment_64(t_segment_command_64* seg, t_file file)
 {
 	struct section_64		*section;
 	uint32_t				nscets;
@@ -21,23 +21,23 @@ static void 	parse_segment_64(s_segment_command_64* seg, s_file file)
 	}
 }
 
-int 			parse_macho_64(s_file file)
+int 			parse_macho_64(t_file file)
 {
 	uint32_t		ncmds;
-	s_load_command	*lc;
+	t_load_command	*lc;
 
-	ncmds = ((s_mach_header_64*)file.ptr)->ncmds;
-	lc = (s_load_command*)(file.ptr + sizeof(s_mach_header_64));
+	ncmds = ((t_mach_header_64*)file.ptr)->ncmds;
+	lc = (t_load_command*)(file.ptr + sizeof(t_mach_header_64));
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
-			parse_segment_64((s_segment_command_64*) lc, file);
+			parse_segment_64((t_segment_command_64*) lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
 	return (0);
 }
 
-static void 	parse_segment(s_segment_command* seg, s_file file)
+static void 	parse_segment(t_segment_command* seg, t_file file)
 {
 	struct section		*section;
 	uint32_t			nscets;
@@ -57,17 +57,17 @@ static void 	parse_segment(s_segment_command* seg, s_file file)
 	}
 }
 
-int 			parse_macho(s_file file)
+int 			parse_macho(t_file file)
 {
 	uint32_t		ncmds;
-	s_load_command	*lc;
+	t_load_command	*lc;
 
-	ncmds = ((s_mach_header*)file.ptr)->ncmds;
-	lc = (s_load_command*)(file.ptr + sizeof(s_mach_header));
+	ncmds = ((t_mach_header*)file.ptr)->ncmds;
+	lc = (t_load_command*)(file.ptr + sizeof(t_mach_header));
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT)
-			parse_segment((s_segment_command*)lc, file);
+			parse_segment((t_segment_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
 	return (0);
