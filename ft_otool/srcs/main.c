@@ -39,6 +39,7 @@ static int 	start(char *filename)
 	if (file.ptr == NULL)
 		return (print_error("ft_otool", "The opening of the file to fail"));
 	ft_otool(file);
+	munmap(file.ptr, file.len);
 	return (0);
 }
 
