@@ -1,6 +1,6 @@
 #include "../includes/ft_otool.h"
 
-void 	parse_segment_64(s_segment_command_64* seg, s_file file)
+static void 	parse_segment_64(s_segment_command_64* seg, s_file file)
 {
 	struct section_64		*section;
 	uint32_t				nscets;
@@ -21,7 +21,7 @@ void 	parse_segment_64(s_segment_command_64* seg, s_file file)
 	}
 }
 
-int 	parse_macho_64(s_file file)
+int 			parse_macho_64(s_file file)
 {
 	uint32_t		ncmds;
 	s_load_command	*lc;
@@ -37,8 +37,7 @@ int 	parse_macho_64(s_file file)
 	return (0);
 }
 
-
-void 	parse_segment(s_segment_command* seg, s_file file)
+static void 	parse_segment(s_segment_command* seg, s_file file)
 {
 	struct section		*section;
 	uint32_t			nscets;
@@ -58,7 +57,7 @@ void 	parse_segment(s_segment_command* seg, s_file file)
 	}
 }
 
-int 	parse_macho(s_file file)
+int 			parse_macho(s_file file)
 {
 	uint32_t		ncmds;
 	s_load_command	*lc;

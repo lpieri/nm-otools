@@ -28,10 +28,10 @@ DEPS =		Makefile			\
 			includes/ft_otool.h	\
 			../libft/libft.a
 
-SRC_NAME= 	main.c       		\
-            parse_segment.c     \
-            parse_fat.c			\
-            archive.c			\
+SRC_NAME= 	main.c 		\
+            macho.c	    \
+            archive.c	\
+            fat.c		\
             utils.c
 
 # ***************** #

@@ -24,9 +24,8 @@ int 	parse_archive(s_file file)
 		str = file.ptr + sizeof(s_ar_header);
 		len = ft_strlen(str);
 		while (!str[len++]);
-		new.name = header->ar_fmag + 2;
-		new.ptr = (void*)(file.ptr + sizeof(s_ar_header) + len - 1);
-		new.len = file.len;
+		new = (s_file){(void*)(str + len - 1), header->ar_fmag + 2, ft_atol
+		  (header->ar_size)};
 		ft_otool(new);
 		file.ptr +=  ft_atol(header->ar_size) + sizeof(s_ar_header);
 	}

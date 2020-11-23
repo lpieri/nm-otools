@@ -22,6 +22,9 @@ typedef struct mach_header_64		s_mach_header_64;
 typedef struct fat_header			s_fat_header;
 typedef struct ar_hdr				s_ar_header;
 
+typedef struct fat_arch				s_fat_arch;
+typedef struct fat_arch_64			s_fat_arch_64;
+
 typedef struct load_command			s_load_command;
 typedef struct segment_command		s_segment_command;
 typedef struct segment_command_64	s_segment_command_64;
@@ -42,9 +45,6 @@ int 	parse_macho_64(s_file file);
 int 	parse_fat(s_file file);
 int 	parse_fat_64(s_file file);
 int 	parse_archive(s_file file);
-
-void 	parse_segment(s_segment_command *seg, s_file file);
-void 	parse_segment_64(s_segment_command_64 *seg, s_file file);
 
 s_file 	open_file(char *filename);
 int 	print_error(const char *prog, const char *msg);
