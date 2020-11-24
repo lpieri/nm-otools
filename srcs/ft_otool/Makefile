@@ -63,14 +63,15 @@ all:		$(NAME)
 
 $(NAME):	echo $(OBJ)
 			@$(CC) $(CFLAGS) $(FLAGSFT) -o $(NAME) $(OBJ) $(CPPFLAGS)
-			@echo "$(GREEN)$(NAME) ready!$(NONE)"
+			@echo "\n$(GREEN)$(NAME) ready!$(NONE)"
 
 echo:
-			@echo "Getting $(NAME) ready"
+			@echo -n Getting $(NAME) ready
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
 			@mkdir -p $(dir $@) 2> /dev/null || true
 			@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+			@echo -n .
 
 clean:
 			@echo "$(YELLOW)Cleaning $(NAME)...$(NONE)"

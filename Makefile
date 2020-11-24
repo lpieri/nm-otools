@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-NM		= ft_nm
-OTOOL	= ft_otool
+NM		=	ft_nm
+OTOOL	=	ft_otool
 
 # ***************** #
 #		Colors		#
@@ -27,9 +27,8 @@ CYAN	=	\033[36m
 # ***************** #
 #		Rules		#
 # ***************** #
-all:		LFT $(NAME)
 
-$(NAME):
+all:		LFT
 			@make -C ./srcs/$(OTOOL)
 			@make -C ./srcs/$(NM)
 			@mv ./srcs/$(OTOOL)/$(OTOOL) .
