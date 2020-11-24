@@ -16,7 +16,7 @@ CC		=	gcc
 
 ERROR	=	-g3 -flto -fsanitize=address -fno-omit-frame-pointer
 
-override CFLAGS	+=	-Wall -Wextra -Werror $(ERROR)
+override CFLAGS	+=	-Wall -Wextra -Werror #$(ERROR)
 
 INCS	=	libft.h
 

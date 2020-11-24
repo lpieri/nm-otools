@@ -16,7 +16,7 @@ NAME	=	ft_otool
 #		Flags		#
 # ***************** #
 CC		=	gcc
-override CFLAGS	+=	-Wall -Wextra -Werror $(ERROR)
+override CFLAGS	+=	-Wall -Wextra -Werror #$(ERROR)
 CPPFLAGS=	-Iincludes
 FLAGSFT	=	-L./../libft -lft
 ERROR	=	-g3 -flto -fsanitize=address -fno-omit-frame-pointer
