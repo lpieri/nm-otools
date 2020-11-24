@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 16:09:37 by cpieri            #+#    #+#             */
-/*   Updated: 2020/11/23 16:09:38 by cpieri           ###   ########.fr       */
+/*   Updated: 2020/11/23 16:09:38 by cpieri           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_hostarch(cpu_type_t type)
 	return (0);
 }
 
-int	parse_fat(t_file file)
+int			parse_fat(t_file file)
 {
 	uint32_t		nfat;
 	t_fat_arch		*arch;
@@ -40,7 +40,7 @@ int	parse_fat(t_file file)
 	return (0);
 }
 
-int	parse_fat_64(t_file file)
+int			parse_fat_64(t_file file)
 {
 	uint32_t		nfat;
 	t_fat_arch_64	*arch;

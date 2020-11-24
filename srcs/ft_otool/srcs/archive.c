@@ -6,20 +6,20 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 16:09:30 by cpieri            #+#    #+#             */
-/*   Updated: 2020/11/23 16:09:32 by cpieri           ###   ########.fr       */
+/*   Updated: 2020/11/23 16:09:32 by cpieri           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_otool.h"
 
-static void 	print_name(char *name)
+static void		print_name(char *name)
 {
 	write(1, "Archive : ", 10);
 	write(1, name, ft_strlen(name));
 	write(1, "\n", 1);
 }
 
-static void 	print_filename(char *name, char *file)
+static void		print_filename(char *name, char *file)
 {
 	write(1, name, ft_strlen(name));
 	write(1, "(", 1);
@@ -27,7 +27,7 @@ static void 	print_filename(char *name, char *file)
 	write(1, ")", 1);
 }
 
-int	parse_archive(t_file file)
+int				parse_archive(t_file file)
 {
 	t_ar_header		*h;
 	char			*str;

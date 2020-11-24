@@ -6,13 +6,13 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 16:09:53 by cpieri            #+#    #+#             */
-/*   Updated: 2020/11/23 16:09:55 by cpieri           ###   ########.fr       */
+/*   Updated: 2020/11/23 16:09:55 by cpieri           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_otool.h"
 
-int	ft_otool(t_file file)
+int			ft_otool(t_file file)
 {
 	uint32_t	magic;
 
@@ -31,7 +31,7 @@ int	ft_otool(t_file file)
 		return (print_msg(file.name, "is not an object file", -1));
 }
 
-static int 	start(char *filename)
+static int	start(char *filename)
 {
 	t_file		file;
 
@@ -43,7 +43,7 @@ static int 	start(char *filename)
 	return (0);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		i;
 

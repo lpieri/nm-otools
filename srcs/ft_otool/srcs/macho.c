@@ -6,7 +6,7 @@
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 16:09:43 by cpieri            #+#    #+#             */
-/*   Updated: 2020/11/23 16:09:47 by cpieri           ###   ########.fr       */
+/*   Updated: 2020/11/23 16:09:47 by cpieri           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	parse_segment_64(t_segment_command_64 *seg, t_file file)
 	}
 }
 
-int	parse_macho_64(t_file file)
+int			parse_macho_64(t_file file)
 {
 	uint32_t		ncmds;
 	t_load_command	*lc;
@@ -68,7 +68,7 @@ static void	parse_segment(t_segment_command *seg, t_file file)
 	}
 }
 
-int	parse_macho(t_file file)
+int			parse_macho(t_file file)
 {
 	uint32_t		ncmds;
 	t_load_command	*lc;
