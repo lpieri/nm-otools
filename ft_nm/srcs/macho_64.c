@@ -53,7 +53,7 @@ static void 	parse_symtab_64(t_symtab_command *seg, t_file file)
 	munmap(syms, nsyms * sizeof(t_sym));
 }
 
-void 	get_section(t_segment_command_64 *seg)
+static void 	get_section_64(t_segment_command_64 *seg)
 {
 	t_section_64	*sec;
 	uint32_t		nscets;
@@ -87,7 +87,7 @@ int 	parse_macho_64(t_file file)
 	while (ncmds--)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
-			get_section((t_segment_command_64*)lc);
+			get_section_64((t_segment_command_64*)lc);
 		if (lc->cmd == LC_SYMTAB)
 			parse_symtab_64((t_symtab_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
