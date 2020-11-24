@@ -22,7 +22,7 @@ static char 	print_symbol_64(t_nslist_64 *sym)
 	return ('\0');
 }
 
-static void 	parse_symtab_64(t_symtab_command* seg, t_file file)
+static void 	parse_symtab_64(t_symtab_command *seg, t_file file)
 {
 	void			*strtab;
 	void 			*symtab;
@@ -35,6 +35,7 @@ static void 	parse_symtab_64(t_symtab_command* seg, t_file file)
 	symtab = file.ptr + seg->symoff;
 	nsyms = seg->nsyms;
 	i = 0;
+	// do malloc nsyms
 	while (i < nsyms) {
 		symbol_data = (t_nslist_64*)symtab + i;
 		symname = strtab + symbol_data->n_un.n_strx;
@@ -54,17 +55,22 @@ static void 	parse_symtab_64(t_symtab_command* seg, t_file file)
 	}
 }
 
+void 	get_section();
+
 int 	parse_macho_64(t_file file)
 {
-	uint32_t				ncmds;
-	struct load_command*	lc;
+	uint32_t		ncmds;
+	t_load_command	*lc;
 
 	ncmds = ((t_mach_header_64*)file.ptr)->ncmds;
 	lc = (t_load_command*)(file.ptr + sizeof(t_mach_header_64));
 	while (ncmds--)
 	{
+		if (lc->cmd == LC_SEGMENT_64)
+			get_section();
 		if (lc->cmd == LC_SYMTAB)
-			parse_symtab_64((t_symtab_command*) lc, file);
+			parse_symtab_64((t_symtab_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
+	return (0);
 }

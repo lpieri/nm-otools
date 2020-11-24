@@ -30,18 +30,22 @@
 # define N_PBUD		0xc
 # define N_INDR		0xa
 
-typedef struct mach_header		t_mach_header;
-typedef struct mach_header_64	t_mach_header_64;
-typedef struct fat_header		t_fat_header;
-typedef struct ar_hdr			t_ar_header;
+typedef struct mach_header			t_mach_header;
+typedef struct mach_header_64		t_mach_header_64;
+typedef struct fat_header			t_fat_header;
+typedef struct ar_hdr				t_ar_header;
 
-typedef struct fat_arch			t_fat_arch;
-typedef struct fat_arch_64		t_fat_arch_64;
+typedef struct fat_arch				t_fat_arch;
+typedef struct fat_arch_64			t_fat_arch_64;
 
-typedef struct load_command		t_load_command;
-typedef struct symtab_command	t_symtab_command;
-typedef struct nlist			t_nslist;
-typedef struct nlist_64			t_nslist_64;
+typedef struct load_command			t_load_command;
+typedef struct segment_command		t_segment_command;
+typedef struct segment_command_64	t_segment_command_64;
+typedef struct section				t_section;
+typedef struct section_64			t_section_64;
+typedef struct symtab_command		t_symtab_command;
+typedef struct nlist				t_nslist;
+typedef struct nlist_64				t_nslist_64;
 
 typedef struct	s_file
 {

@@ -35,6 +35,7 @@ static void 	parse_symtab(t_symtab_command* seg, t_file file)
 	symtab = file.ptr + seg->symoff;
 	nsyms = seg->nsyms;
 	i = 0;
+	// do malloc nsysm
 	while (i < nsyms)
 	{
 		symbol_data = (t_nslist*)symtab + i;
@@ -44,17 +45,22 @@ static void 	parse_symtab(t_symtab_command* seg, t_file file)
 	}
 }
 
+void 	get_section();
+
 int 	parse_macho(t_file file)
 {
-	uint32_t				ncmds;
-	struct load_command*	lc;
+	uint32_t		ncmds;
+	t_load_command	*lc;
 
 	ncmds = ((t_mach_header*)file.ptr)->ncmds;
 	lc = (t_load_command*)(file.ptr + sizeof(t_mach_header));
 	while (ncmds--)
 	{
+		if (lc->cmd == LC_SEGMENT)
+			get_section();
 		if (lc->cmd == LC_SYMTAB)
 			parse_symtab((t_symtab_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
+	return (0;
 }
