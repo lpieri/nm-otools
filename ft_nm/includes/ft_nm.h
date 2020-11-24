@@ -2,15 +2,22 @@
 # define FT_NM_H
 
 # include "../../libft/include/libft.h"
-# include <mach-o/loader.h>
-# include <mach-o/nlist.h>
+
 # include <fcntl.h>
-# include <sys/stat.h>
-# include <stdio.h>
-# include <sys/mman.h>
 # include <unistd.h>
+# include <sys/stat.h>
+# include <sys/mman.h>
+
+# include <stdio.h>
+
+# include <mach-o/loader.h>
+# include <mach-o/fat.h>
+# include <mach-o/nlist.h>
+# include <ar.h>
 
 # define FAILURE	-1
+# define AR_MAGIC 0x72613c21
+# define AR_CIGAM 0x213c6172
 
 # define N_STAB		0xe0
 # define N_PEXT		0x10
@@ -23,32 +30,38 @@
 # define N_PBUD		0xc
 # define N_INDR		0xa
 
-typedef struct mach_header		s_mach_header;
-typedef struct mach_header_64	s_mach_header_64;
-typedef struct load_command		s_load_command;
-typedef struct symtab_command	s_symtab_command;
-typedef struct nlist			s_nslist;
-typedef struct nlist_64			s_nslist_64;
+typedef struct mach_header		t_mach_header;
+typedef struct mach_header_64	t_mach_header_64;
+typedef struct fat_header		t_fat_header;
+typedef struct ar_hdr			t_ar_header;
 
-typedef struct	t_file
+typedef struct fat_arch			t_fat_arch;
+typedef struct fat_arch_64		t_fat_arch_64;
+
+typedef struct load_command		t_load_command;
+typedef struct symtab_command	t_symtab_command;
+typedef struct nlist			t_nslist;
+typedef struct nlist_64			t_nslist_64;
+
+typedef struct	s_file
 {
 	void 		*ptr;
 	char 		*name;
 	size_t		len;
-	int 		arch;
-}				s_file;
+}				t_file;
 
-void	parse_macho(s_file file);
-void	parse_macho_64(s_file file);
+int 	parse_macho(t_file file);
+int 	parse_macho_64(t_file file);
+int 	parse_fat(t_file file);
+int 	parse_fat_64(t_file file);
+int 	parse_archive(t_file file);
 
-char	print_symbol(s_nslist *sym);
-char 	print_symbol_64(s_nslist_64 *sym);
+int 	ft_nm(t_file file);
 
-int 	check_macho_file(s_file file);
+char 	find_section(uint8_t sect, uint8_t type);
 
-s_file 	open_file(char *filename);
-void	print_error(const char *prog, const char *msg);
-void	print_msg(const char *prog, const char *msg);
-
+t_file 	open_file(char *filename);
+int 	print_error(const char *prog, const char *msg);
+int 	print_msg(const char *prog, const char *msg, int ret);
 
 #endif

@@ -1,24 +1,33 @@
 #include "../includes/ft_nm.h"
 
-static int 	ft_nm(char *filename)
+int 	ft_nm(t_file file)
 {
-	s_file 		file;
+	uint32_t	magic;
+
+	magic = ((uint32_t*)file.ptr)[0];
+	if (magic == MH_MAGIC || magic == MH_CIGAM)
+		return (parse_macho(file));
+	else if (magic == MH_CIGAM_64 || magic == MH_MAGIC_64)
+		return (parse_macho_64(file));
+	else if (magic == FAT_MAGIC || magic == FAT_CIGAM)
+		return (parse_fat(file));
+	else if (magic == FAT_MAGIC_64 || magic == FAT_CIGAM_64)
+		return (parse_fat_64(file));
+	else if (magic == AR_MAGIC || magic == AR_CIGAM)
+		return (parse_archive(file));
+	else
+		return (print_msg(file.name, "is not an object file", -1));
+}
+
+static int	start(char *filename)
+{
+	t_file 		file;
 
 	file = open_file(filename);
 	if (file.ptr == NULL)
-	{
-		print_error("ft_otool", "The opening of the file to fail");
-		return (FAILURE);
-	}
-	if ((file.arch = check_macho_file(file)) == -1)
-	{
-		print_msg(filename, "is not an object file");
-		return (FAILURE);
-	}
-	if (file.arch == 1)
-		parse_macho_64(file);
-	else
-		parse_macho(file);
+		return (print_error("ft_otool", "The opening of the file to fail"));
+	ft_nm(file);
+	munmap(file.ptr, file.len);
 	return (0);
 }
 
@@ -31,7 +40,7 @@ int		main(int ac, char **av)
 		i = 1;
 		while (i < ac)
 		{
-			ft_nm(av[i]);
+			start(av[i]);
 			i++;
 		}
 		return (0);
