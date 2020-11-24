@@ -44,6 +44,10 @@ static void 	parse_symtab_64(t_symtab_command *seg, t_file file)
 	{
 		symbol_data = (t_nslist_64*)symtab + i;
 		syms[i].name = strtab + symbol_data->n_un.n_strx;
+		syms[i].print_value = 1;
+		if (((symbol_data->n_type & N_TYPE) == N_UNDF) &&
+			(symbol_data->n_type & N_EXT))
+			syms[i].print_value = 0;
 		syms[i].value = symbol_data->n_value;
 		syms[i].symbol = get_symbol_64(symbol_data);
 		i++;

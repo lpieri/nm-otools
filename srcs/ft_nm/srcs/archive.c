@@ -12,19 +12,13 @@
 
 #include "../includes/ft_nm.h"
 
-static void 	print_name(char *name)
-{
-	write(1, "Archive : ", 10);
-	write(1, name, ft_strlen(name));
-	write(1, "\n", 1);
-}
-
 static void 	print_filename(char *name, char *file)
 {
+	write(1, "\n", 1);
 	write(1, name, ft_strlen(name));
 	write(1, "(", 1);
 	write(1, file, ft_strlen(file));
-	write(1, ")", 1);
+	write(1, "):\n", 3);
 }
 
 int	parse_archive(t_file file)
@@ -33,7 +27,6 @@ int	parse_archive(t_file file)
 	char			*str;
 	size_t			len;
 
-	print_name(file.name);
 	h = (t_ar_header*)(file.ptr + SARMAG);
 	file.ptr += ft_atol(h->ar_size) + sizeof(t_ar_header) + SARMAG;
 	while (file.ptr)

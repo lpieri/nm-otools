@@ -13,7 +13,7 @@
 #ifndef FT_OTOOL_H
 # define FT_OTOOL_H
 
-# include "../../libft/include/libft.h"
+# include "../../../libft/include/libft.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/stat.h>

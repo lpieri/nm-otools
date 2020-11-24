@@ -1,7 +1,7 @@
 #ifndef FT_NM_H
 # define FT_NM_H
 
-# include "../../libft/include/libft.h"
+# include "../../../libft/include/libft.h"
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -58,6 +58,7 @@ typedef struct	s_index
 typedef struct	s_sym
 {
 	uint64_t	value;
+	int			print_value;
 	char 		symbol;
 	char 		*name;
 }				t_sym;

@@ -36,11 +36,11 @@ void	print_symbols(t_sym *syms, uint32_t nsyms)
 	{
 		if (syms[i].symbol != 'M' && syms[i].symbol != '-')
 		{
-			if (syms[i].value != 0 && ft_strcmp(syms[i].name, "\0") != 0)
+			if (syms[i].print_value == 1)
 				ft_putstr(ft_hex64_to_char(swap_uint64t(syms[i].value)));
 			if (ft_strcmp(syms[i].name, "\0") != 0)
 			{
-				if (syms[i].value != 0)
+				if (syms[i].print_value == 1)
 					ft_putchar(' ');
 				else
 					ft_putstr("                 ");

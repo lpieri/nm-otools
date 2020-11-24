@@ -10,29 +10,32 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	ft_otool
+NAME	=	ft_nm
 
 # ***************** #
 #		Flags		#
 # ***************** #
 CC		=	gcc
-override CFLAGS	+=	-Wall -Wextra -Werror #$(ERROR)
+override CFLAGS	+=	-Wall -Wextra -Werror $(ERROR)
 CPPFLAGS=	-Iincludes
-FLAGSFT	=	-L./../libft -lft
+FLAGSFT	=	-L./../../libft -lft
 ERROR	=	-g3 -flto -fsanitize=address -fno-omit-frame-pointer
 
 # ***************** #
 #		Sources		#
 # ***************** #
 DEPS =		Makefile			\
-			includes/ft_otool.h	\
-			../libft/libft.a
+			includes/ft_nm.h	\
+			../../libft/libft.a
 
-SRC_NAME= 	main.c 		\
-            macho.c	    \
-            archive.c	\
+SRC_NAME= 	main.c		\
+            macho_32.c	\
+            macho_64.c	\
             fat.c		\
-            utils.c
+            archive.c	\
+            utils.c		\
+            index.c		\
+            sort_print.c
 
 # ***************** #
 #		Paths		#
@@ -59,36 +62,26 @@ CYAN	=	\033[36m
 # ***************** #
 #		Rules		#
 # ***************** #
-all:		LFT $(NAME)
+all:		$(NAME)
 
 $(NAME):	echo $(OBJ)
 			@$(CC) $(CFLAGS) $(FLAGSFT) -o $(NAME) $(OBJ) $(CPPFLAGS)
-			@echo "\n$(GREEN)$(NAME) ready!$(NONE)"
+			@echo "$(GREEN)$(NAME) ready!$(NONE)"
 
 echo:
-			@echo -n Getting $(NAME) ready
+			@echo "Getting $(NAME) ready"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(DEPS)
 			@mkdir -p $(dir $@) 2> /dev/null || true
 			@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-			@echo -n .
 
 clean:
-			@echo "$(YELLOW)Cleaning...$(NONE)"
-			@make clean -C ./../libft/
+			@echo "$(YELLOW)Cleaning $(NAME)...$(NONE)"
 			@/bin/rm -f $(OBJ)
 			@rm -rf $(OBJ_PATH) 2> /dev/null || true
 
 fclean:		clean
-			@make fclean -C ./../libft/
-			@echo "$(RED)Libft.a deleted$(NONE)"
-			@/bin/rm -f $(NAME)
-			@echo "$(RED)$(NAME) deleted !$(NONE)"
 
 re:			fclean all
 
-LFT:
-		@make -C ./../libft/;
-		@echo "\n$(GREEN)Libft ready!$(NONE)";
-
-.PHONY:	all clean fclean re echo LFT
+.PHONY:	all clean fclean re echo
