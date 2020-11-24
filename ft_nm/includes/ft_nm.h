@@ -47,6 +47,21 @@ typedef struct symtab_command		t_symtab_command;
 typedef struct nlist				t_nslist;
 typedef struct nlist_64				t_nslist_64;
 
+typedef struct	s_index
+{
+	size_t 		text;
+	size_t		data;
+	size_t		bss;
+	size_t 		index;
+}				t_index;
+
+typedef struct	s_sym
+{
+	uint64_t	value;
+	char 		symbol;
+	char 		*name;
+}				t_sym;
+
 typedef struct	s_file
 {
 	void 		*ptr;
@@ -62,7 +77,11 @@ int 	parse_archive(t_file file);
 
 int 	ft_nm(t_file file);
 
-char 	find_section(uint8_t sect, uint8_t type);
+void	print_symbols(t_sym *syms, uint32_t nsyms);
+
+char 	find_section(uint8_t sect);
+t_index    *var_index(void);
+void        reset_index(void);
 
 t_file 	open_file(char *filename);
 int 	print_error(const char *prog, const char *msg);

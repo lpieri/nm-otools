@@ -50,19 +50,17 @@ t_file 	open_file(char *filename)
 	return (file);
 }
 
-char 	find_section(uint8_t sect, uint8_t type)
+char 	find_section(uint8_t sect)
 {
 	char	ret;
-//	ft_putnbr(sect);
-	if (sect == 1)
+
+	if (sect == var_index()->text)
 		ret = 'T';
-	else if (sect == 2)
+	else if (sect == var_index()->data)
 		ret = 'D';
-	else if (sect == 3)
+	else if (sect == var_index()->bss)
 		ret = 'B';
 	else
 		ret = 'S';
-	if (!(type & N_EXT))
-		ret -= 'A' - 'a';
 	return (ret);
 }

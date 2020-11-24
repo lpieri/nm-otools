@@ -28,10 +28,14 @@ DEPS =		Makefile			\
 			includes/ft_nm.h	\
 			../libft/libft.a
 
-SRC_NAME= 	main.c       		\
-            parse_segment.c     \
-            utils.c				\
-            print_symbol.c
+SRC_NAME= 	main.c		\
+            macho_32.c	\
+            macho_64.c	\
+            fat.c		\
+            archive.c	\
+            utils.c		\
+            index.c		\
+            sort_print.c
 
 # ***************** #
 #		Paths		#

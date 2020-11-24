@@ -1,26 +1,26 @@
 #include "../includes/ft_nm.h"
 
-static char 	print_symbol(t_nslist *sym)
-{
-	if (N_STAB & sym->n_type)
-		return ('-');
-	else if ((N_TYPE & sym->n_type) == N_UNDF)
-	{
-		if (sym->n_un.n_strx == 0)
-			return ('C');
-		if (sym->n_type & N_EXT)
-			return ('U');
-		else
-			return ('?');
-	}
-	else if ((N_TYPE & sym->n_type) == N_SECT)
-		return (find_section(sym->n_sect, sym->n_type));
-	else if ((N_TYPE & sym->n_type) == N_ABS)
-		return ('A');
-	else if ((N_TYPE & sym->n_type) == N_INDR)
-		return ('I');
-	return ('\0');
-}
+//static char 	print_symbol(t_nslist *sym)
+//{
+//	if (N_STAB & sym->n_type)
+//		return ('-');
+//	else if ((N_TYPE & sym->n_type) == N_UNDF)
+//	{
+//		if (sym->n_un.n_strx == 0)
+//			return ('C');
+//		if (sym->n_type & N_EXT)
+//			return ('U');
+//		else
+//			return ('?');
+//	}
+//	else if ((N_TYPE & sym->n_type) == N_SECT)
+//		return (find_section(sym->n_sect));
+//	else if ((N_TYPE & sym->n_type) == N_ABS)
+//		return ('A');
+//	else if ((N_TYPE & sym->n_type) == N_INDR)
+//		return ('I');
+//	return ('\0');
+//}
 
 static void 	parse_symtab(t_symtab_command* seg, t_file file)
 {
@@ -62,5 +62,5 @@ int 	parse_macho(t_file file)
 			parse_symtab((t_symtab_command*)lc, file);
 		lc = (void*)lc + lc->cmdsize;
 	}
-	return (0;
+	return (0);
 }
