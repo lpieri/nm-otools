@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   archive.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:23:12 by cpieri            #+#    #+#             */
-/*   Updated: 2020/10/19 13:23:13 by cpieri           ###   ########.fr       */
+/*   Created: 2020/11/23 16:09:30 by cpieri            #+#    #+#             */
+/*   Updated: 2020/11/23 16:09:32 by cpieri           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_nm.h"
 
-int 	print_msg(const char *prog, const char *msg, int ret)
+int		print_msg(const char *prog, const char *msg, int ret)
 {
 	ft_putstr_fd(prog, 1);
 	ft_putstr_fd(": ", 1);
@@ -20,7 +20,7 @@ int 	print_msg(const char *prog, const char *msg, int ret)
 	return (ret);
 }
 
-int 	print_error(const char *prog, const char *msg)
+int		print_error(const char *prog, const char *msg)
 {
 	ft_putstr_fd(prog, 2);
 	ft_putstr_fd(": ", 2);
@@ -28,7 +28,7 @@ int 	print_error(const char *prog, const char *msg)
 	return (-1);
 }
 
-t_file 	open_file(char *filename)
+t_file	open_file(char *filename)
 {
 	int			fd;
 	struct stat	stat;
@@ -43,14 +43,14 @@ t_file 	open_file(char *filename)
 	file.len = stat.st_size;
 	file.name = filename;
 	file.ptr = mmap(NULL, stat.st_size, PROT_WRITE | PROT_READ, MAP_PRIVATE, fd,
-			  0);
+		0);
 	if (file.ptr == NULL)
 		return (file);
 	close(fd);
 	return (file);
 }
 
-char 	find_section(uint8_t sect)
+char	find_section(uint8_t sect)
 {
 	char	ret;
 

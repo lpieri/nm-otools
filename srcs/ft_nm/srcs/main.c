@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   archive.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/23 16:09:30 by cpieri            #+#    #+#             */
+/*   Updated: 2020/11/23 16:09:32 by cpieri           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_nm.h"
 
-int 	ft_nm(t_file file)
+int			ft_nm(t_file file)
 {
 	uint32_t	magic;
 
@@ -21,7 +33,7 @@ int 	ft_nm(t_file file)
 
 static int	start(char *filename)
 {
-	t_file 		file;
+	t_file		file;
 
 	file = open_file(filename);
 	if (file.ptr == NULL)
@@ -31,7 +43,7 @@ static int	start(char *filename)
 	return (0);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		i;
 

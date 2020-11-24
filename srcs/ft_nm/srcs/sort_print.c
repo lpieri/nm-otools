@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   archive.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cpieri <cpieri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/23 16:09:30 by cpieri            #+#    #+#             */
+/*   Updated: 2020/11/23 16:09:32 by cpieri           ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_nm.h"
 
-t_sym 	*sort_symbols(t_sym *syms, uint32_t nsyms)
+t_sym	*sort_symbols(t_sym *syms, uint32_t nsyms)
 {
 	t_sym		tmp;
 	uint32_t	i;
