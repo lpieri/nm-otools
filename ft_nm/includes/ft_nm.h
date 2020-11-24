@@ -69,22 +69,23 @@ typedef struct	s_file
 	size_t		len;
 }				t_file;
 
-int 	parse_macho(t_file file);
-int 	parse_macho_64(t_file file);
-int 	parse_fat(t_file file);
-int 	parse_fat_64(t_file file);
-int 	parse_archive(t_file file);
+int 		parse_macho(t_file file);
+int 		parse_macho_64(t_file file);
+int 		parse_fat(t_file file);
+int 		parse_fat_64(t_file file);
+int 		parse_archive(t_file file);
 
-int 	ft_nm(t_file file);
+int 		ft_nm(t_file file);
 
-void	print_symbols(t_sym *syms, uint32_t nsyms);
+void		print_symbols(t_sym *syms, uint32_t nsyms);
+t_sym 		*sort_symbols(t_sym *syms, uint32_t nsyms);
 
-char 	find_section(uint8_t sect);
-t_index    *var_index(void);
-void        reset_index(void);
+char 		find_section(uint8_t sect);
+t_index		*var_index(void);
+void		reset_index(void);
 
-t_file 	open_file(char *filename);
-int 	print_error(const char *prog, const char *msg);
-int 	print_msg(const char *prog, const char *msg, int ret);
+t_file 		open_file(char *filename);
+int 		print_error(const char *prog, const char *msg);
+int 		print_msg(const char *prog, const char *msg, int ret);
 
 #endif

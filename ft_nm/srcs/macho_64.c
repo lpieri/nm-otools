@@ -40,34 +40,39 @@ static void 	parse_symtab_64(t_symtab_command *seg, t_file file)
 	i = 0;
 	syms = (t_sym*)mmap(NULL, nsyms * sizeof(t_sym), PROT_WRITE | PROT_READ,
 					 MAP_ANON | MAP_SHARED, 0, 0);
-	while (i < nsyms) {
+	while (i < nsyms)
+	{
 		symbol_data = (t_nslist_64*)symtab + i;
 		syms[i].name = strtab + symbol_data->n_un.n_strx;
 		syms[i].value = symbol_data->n_value;
 		syms[i].symbol = get_symbol_64(symbol_data);
 		i++;
 	}
-	//sort
+	syms = sort_symbols(syms, nsyms);
 	print_symbols(syms, nsyms);
 	munmap(syms, nsyms * sizeof(t_sym));
 }
 
 void 	get_section(t_segment_command_64 *seg)
 {
-	t_section_64	*section;
+	t_section_64	*sec;
 	uint32_t		nscets;
 
-	section = (t_section_64*)((void*)seg + sizeof(t_segment_command_64));
+	sec = (t_section_64*)((void*)seg + sizeof(t_segment_command_64));
 	nscets = seg->nsects;
 	while (nscets--)
 	{
-		if (ft_strncmp(section->sectname, "__text", 16) == 0)
+		if (ft_strcmp(sec->sectname, SECT_TEXT) == 0 &&
+			ft_strcmp(sec->segname, SEG_TEXT) == 0)
 			var_index()->text = var_index()->index;
-		else if (ft_strncmp(section->sectname, "__data", 16) == 0)
+		if (ft_strcmp(sec->sectname, SECT_DATA) == 0 &&
+			ft_strcmp(sec->segname, SEG_DATA) == 0)
 			var_index()->data = var_index()->index;
-		else if (ft_strncmp(section->sectname, "__bss", 16) == 0)
+		if (ft_strcmp(sec->sectname, SECT_BSS) == 0 &&
+			ft_strcmp(sec->segname, SEG_DATA) == 0)
 			var_index()->bss = var_index()->index;
 		var_index()->index++;
+		sec = (void*)sec + sizeof(t_section_64);
 	}
 }
 

@@ -54,13 +54,12 @@ char 	find_section(uint8_t sect)
 {
 	char	ret;
 
+	ret = 'S';
 	if (sect == var_index()->text)
 		ret = 'T';
-	else if (sect == var_index()->data)
+	if (sect == var_index()->data)
 		ret = 'D';
-	else if (sect == var_index()->bss)
+	if (sect == var_index()->bss)
 		ret = 'B';
-	else
-		ret = 'S';
 	return (ret);
 }
