@@ -12,9 +12,9 @@
 
 #include "../includes/ft_nm.h"
 
-static char 	get_symbol(t_nslist *sym)
+static char		get_symbol(t_nslist *sym)
 {
-	char 	letter;
+	char	letter;
 
 	letter = '\0';
 	if (N_STAB & sym->n_type)
@@ -37,31 +37,28 @@ static char 	get_symbol(t_nslist *sym)
 	return (!(sym->n_type & N_EXT) ? letter + 32 : letter);
 }
 
-static void 	parse_symtab(t_symtab_command *seg, t_file file)
+static void		parse_symtab(t_symtab_command *seg, t_file file)
 {
-	void			*strtab;
-	void 			*symtab;
-	t_nslist	 	*symbol_data;
-	t_sym			*syms;
-	uint32_t		nsyms;
-	uint32_t		i;
+	void		*strtab;
+	t_nslist	*symd;
+	t_sym		*syms;
+	uint32_t	nsyms;
+	uint32_t	i;
 
 	strtab = file.ptr + seg->stroff;
-	symtab = file.ptr + seg->symoff;
 	nsyms = seg->nsyms;
 	i = 0;
 	syms = (t_sym*)mmap(NULL, nsyms * sizeof(t_sym), PROT_WRITE | PROT_READ,
 						MAP_ANON | MAP_SHARED, 0, 0);
 	while (i < nsyms)
 	{
-		symbol_data = (t_nslist*)symtab + i;
-		syms[i].name = strtab + symbol_data->n_un.n_strx;
+		symd = (t_nslist*)(file.ptr + seg->symoff) + i;
+		syms[i].name = strtab + symd->n_un.n_strx;
 		syms[i].print_value = 1;
-		if (((symbol_data[i].n_type & N_TYPE) == N_UNDF) &&
-			(symbol_data[i].n_type & N_EXT))
+		if (((symd->n_type & N_TYPE) == N_UNDF) && (symd->n_type & N_EXT))
 			syms[i].print_value = 0;
-		syms[i].value = symbol_data->n_value;
-		syms[i].symbol = get_symbol(symbol_data);
+		syms[i].value = symd->n_value;
+		syms[i].symbol = get_symbol(symd);
 		i++;
 	}
 	syms = sort_symbols(syms, nsyms);
@@ -69,7 +66,7 @@ static void 	parse_symtab(t_symtab_command *seg, t_file file)
 	munmap(syms, nsyms * sizeof(t_sym));
 }
 
-static void 	get_section(t_segment_command *seg)
+static void		get_section(t_segment_command *seg)
 {
 	t_section	*sec;
 	uint32_t	nscets;
@@ -92,7 +89,7 @@ static void 	get_section(t_segment_command *seg)
 	}
 }
 
-int 	parse_macho(t_file file)
+int				parse_macho(t_file file)
 {
 	uint32_t		ncmds;
 	t_load_command	*lc;

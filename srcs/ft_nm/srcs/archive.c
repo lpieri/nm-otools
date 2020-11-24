@@ -12,7 +12,7 @@
 
 #include "../includes/ft_nm.h"
 
-static void 	print_filename(char *name, char *file)
+static void		print_filename(char *name, char *file)
 {
 	write(1, "\n", 1);
 	write(1, name, ft_strlen(name));
@@ -21,7 +21,7 @@ static void 	print_filename(char *name, char *file)
 	write(1, "):\n", 3);
 }
 
-int	parse_archive(t_file file)
+int				parse_archive(t_file file)
 {
 	t_ar_header		*h;
 	char			*str;
